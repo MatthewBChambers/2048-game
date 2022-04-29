@@ -23,12 +23,13 @@ int main(){
 while (1) {
 place();
 printgrid();
-Sleep(4);
+//Sleep(4);
 
 }
 
 }
 
+void left
 
 void printgrid() {
     printf("\n");
