@@ -16,20 +16,68 @@ void printgrid();
 void gameover();
 void place();
 int *getemptyloc();
+int *move(int);
+void left();
 
 int grid[4][4];
 
 int main(){
+    int k = 0;
 while (1) {
 place();
+    left();
 printgrid();
-//Sleep(4);
 
+
+printf("\n%d\n",k);
+k++;
+
+ if (k > 1000)
+     exit(0);
 }
 
 }
+//when left arrow key is hit, this method is called
+//whcih makes use of the move method to alter values.
+void left(){
+    for (int i = 0; i < 4; i++ ) {
+            /*int array[4];
+            array[0] = grid[i][0];
+            array[1] = grid[i][2];
+            array[2] = grid[i][3];
+            array[3] = grid[i][4];
 
-void left
+            move(&array);
+            printf("\n%d  %d  %d  %d",array[0],array[1],array[2],array[3]);*/
+            int array[] = {grid[i][0], grid[i][1], grid[i][2], grid[i][3]};
+            int *R = array;
+            R = move(R);
+            for (int f = 0; f < 4; f++) {
+                grid[i][f] = *(R+f);
+            }
+    }
+}
+//computes combinations and moves things to the front of the array.
+int *move(int *u){
+    //add
+    for (int f = 0; f < 3; f++) {
+        if (*(u+f) == *(u+f+1)){
+            *(u+f) *= 2;
+            *(u+f+1) = 0;
+        }
+    }
+
+    //move
+    for (int j = 0; j < 4; j++) {
+        for (int k = 0; k < 3; k++) {
+            if (*(u+k)==0 && *(u+k+1)!=0) {
+                *(u+k) = *(u+k+1);
+                *(u+k+1) = 0;
+            }
+        }
+    }
+    return u;
+}
 
 void printgrid() {
     printf("\n");
