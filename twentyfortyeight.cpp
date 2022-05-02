@@ -16,16 +16,19 @@ void printgrid();
 void gameover();
 void place();
 int *getemptyloc();
-int *move(int);
+
 void left();
+void moveleft();
 
 int grid[4][4];
 
 int main(){
+    srand (time(NULL));
     int k = 0;
 while (1) {
 place();
-    left();
+    printgrid();
+left();
 printgrid();
 
 
@@ -37,47 +40,47 @@ k++;
 }
 
 }
-//when left arrow key is hit, this method is called
+//when left/right arrow key is hit, this method is called
 //whcih makes use of the move method to alter values.
+// 3,-1 right.  0,1 left.
 void left(){
-    for (int i = 0; i < 4; i++ ) {
-            /*int array[4];
-            array[0] = grid[i][0];
-            array[1] = grid[i][2];
-            array[2] = grid[i][3];
-            array[3] = grid[i][4];
 
-            move(&array);
-            printf("\n%d  %d  %d  %d",array[0],array[1],array[2],array[3]);*/
-            int array[] = {grid[i][0], grid[i][1], grid[i][2], grid[i][3]};
-            int *R = array;
-            R = move(R);
-            for (int f = 0; f < 4; f++) {
-                grid[i][f] = *(R+f);
-            }
-    }
-}
-//computes combinations and moves things to the front of the array.
-int *move(int *u){
-    //add
-    for (int f = 0; f < 3; f++) {
-        if (*(u+f) == *(u+f+1)){
-            *(u+f) *= 2;
-            *(u+f+1) = 0;
-        }
-    }
+    //movement
+    moveleft();
 
-    //move
-    for (int j = 0; j < 4; j++) {
-        for (int k = 0; k < 3; k++) {
-            if (*(u+k)==0 && *(u+k+1)!=0) {
-                *(u+k) = *(u+k+1);
-                *(u+k+1) = 0;
+    //addition
+    for (int f = 0; f < 4; f++) {
+
+        for (int i = 0; i < 4 ; i ++) {
+            printf("t");
+            if (grid[f][i] == grid[f][i + 1]) {
+                grid[f][i] *= 2;
+                grid[f][i + 1] = 0;
             }
         }
     }
-    return u;
+
+    //movement
+    moveleft();
+
+
 }
+void moveleft(){
+    //addition
+    for (int f = 0; f < 4; f++) {
+        for (int j = 0; j < 4; j++) {
+            for (int k = 0; k < 3; k++) {
+                if (grid[j][k] == 0 && grid[j][k+1] > 0) {
+                    grid[j][k] = grid[j][k + 1];
+                    grid[j][k + 1] = 0;
+                }
+            }
+        }
+    }
+}
+
+
+
 
 void printgrid() {
     printf("\n");
@@ -105,10 +108,11 @@ void place(){
 //returns a random empty space
 //if returns -1, game is over, there is no free space
 int *getemptyloc () {
-srand (time(NULL));
+//srand (time(NULL)); moved to main
 
   /* generate  number 0 to 15: */
   int offput = rand() % 16;
+  printf("%d",offput);
   for (int runtwlv = 0; runtwlv  < 16; runtwlv++) {
     for (int i = 0; i < 4; i++ ) {
         for (int z = 0; z < 4; z++ ) {
