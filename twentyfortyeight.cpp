@@ -119,6 +119,28 @@ void moveright(){
     }
 }
 
+void up(){
+
+    //movement
+    moveup();
+
+    //addition
+    for (int f = 0; f < 4; f++) {
+
+        for (int i = 3; i > 0 ; i--) {
+            printf("t");
+            if (grid[f][i] == grid[f][i - 1]) {
+                grid[f][i] *= 2;
+                grid[f][i - 1] = 0;
+            }
+        }
+    }
+
+    //movement
+    moveup();
+
+
+}
 
 void printgrid() {
     printf("\n");
