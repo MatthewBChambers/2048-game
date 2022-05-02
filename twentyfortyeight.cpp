@@ -19,6 +19,8 @@ int *getemptyloc();
 
 void left();
 void moveleft();
+void right();
+void moveright();
 
 int grid[4][4];
 
@@ -28,7 +30,8 @@ int main(){
 while (1) {
 place();
     printgrid();
-left();
+//left();
+right();
 printgrid();
 
 
@@ -51,7 +54,7 @@ void left(){
     //addition
     for (int f = 0; f < 4; f++) {
 
-        for (int i = 0; i < 4 ; i ++) {
+        for (int i = 0; i < 3 ; i ++) {
             printf("t");
             if (grid[f][i] == grid[f][i + 1]) {
                 grid[f][i] *= 2;
@@ -79,7 +82,42 @@ void moveleft(){
     }
 }
 
+void right(){
 
+    //movement
+    moveright();
+
+    //addition
+    for (int f = 0; f < 4; f++) {
+
+        for (int i = 3; i > 0 ; i--) {
+            printf("t");
+            if (grid[f][i] == grid[f][i - 1]) {
+                grid[f][i] *= 2;
+                grid[f][i - 1] = 0;
+            }
+        }
+    }
+
+    //movement
+    moveright();
+
+
+}
+
+void moveright(){
+    //addition
+    for (int f = 0; f < 4; f++) {
+        for (int j = 0; j < 4; j++) {
+            for (int k = 3; k > 0; k--) {
+                if (grid[j][k] == 0 && grid[j][k-1] > 0) {
+                    grid[j][k] = grid[j][k - 1];
+                    grid[j][k - 1] = 0;
+                }
+            }
+        }
+    }
+}
 
 
 void printgrid() {
@@ -111,7 +149,7 @@ int *getemptyloc () {
 //srand (time(NULL)); moved to main
 
   /* generate  number 0 to 15: */
-  int offput = rand() % 16;
+  int offput = rand()  % 16;
   printf("%d",offput);
   for (int runtwlv = 0; runtwlv  < 16; runtwlv++) {
     for (int i = 0; i < 4; i++ ) {
