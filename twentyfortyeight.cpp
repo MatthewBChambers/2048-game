@@ -8,9 +8,11 @@
 #endif
 #include <iostream>
 #include <cstdio>
+#include <cstdlib>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>
 #include "twentyfortyeight.h"
+#include <fstream>
 using namespace std;
 void printgrid();
 void gameover();
@@ -21,12 +23,22 @@ void left();
 void moveleft();
 void right();
 void moveright();
+void up();
+void moveup();
 
 int grid[4][4];
 
 int main(){
     srand (time(NULL));
     int k = 0;
+
+    while(1){
+        if(GetAsyncKeyState(VK_UP)) {
+            printf("gfdgfdbvc\n");
+            Sleep(2000);
+            GetAsyncKeyState(VK_UP);
+        }
+    }
 while (1) {
 place();
     printgrid();
@@ -141,6 +153,7 @@ void up(){
 
 
 }
+void moveup(){};
 
 void printgrid() {
     printf("\n");
