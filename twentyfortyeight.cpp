@@ -25,25 +25,26 @@ void right();
 void moveright();
 void up();
 void moveup();
-
+void down();
+void movedown();
 int grid[4][4];
 
 int main(){
     srand (time(NULL));
     int k = 0;
-
+/*
     while(1){
         if(GetAsyncKeyState(VK_UP)) {
             printf("gfdgfdbvc\n");
             Sleep(2000);
             GetAsyncKeyState(VK_UP);
         }
-    }
+    }*/
 while (1) {
 place();
     printgrid();
 //left();
-right();
+down();
 printgrid();
 
 
@@ -139,11 +140,11 @@ void up(){
     //addition
     for (int f = 0; f < 4; f++) {
 
-        for (int i = 3; i > 0 ; i--) {
+        for (int i = 0; i < 3 ; i++) {
             printf("t");
-            if (grid[f][i] == grid[f][i - 1]) {
-                grid[f][i] *= 2;
-                grid[f][i - 1] = 0;
+            if (grid[i][f] == grid[i + 1][f]) {
+                grid[i][f] *= 2;
+                grid[i + 1][f] = 0;
             }
         }
     }
@@ -153,7 +154,53 @@ void up(){
 
 
 }
-void moveup(){};
+void moveup(){
+    for (int f = 0; f < 4; f++) {
+        for (int j = 0; j < 4; j++) {
+            for (int k = 0; k < 3; k++) {
+                if (grid[k][j] == 0 && grid[k+1][j] > 0) {
+                    grid[k][j] = grid[k + 1][j];
+                    grid[k+1][j] = 0;
+                }
+            }
+        }
+    }
+};
+
+void down(){
+
+    //movement
+    movedown();
+
+    //addition
+    for (int f = 0; f < 4; f++) {
+
+        for (int i = 3; i > 0 ; i--) {
+            printf("t");
+            if (grid[i][f] == grid[i - 1][f]) {
+                grid[i][f] *= 2;
+                grid[i - 1][f] = 0;
+            }
+        }
+    }
+
+    //movement
+    movedown();
+
+
+}
+void movedown(){
+    for (int f = 0; f < 4; f++) {
+        for (int j = 0; j < 4; j++) {
+            for (int k = 3; k > 0; k--) {
+                if (grid[k][j] == 0 && grid[k-1][j] > 0) {
+                    grid[k][j] = grid[k - 1][j];
+                    grid[k-1][j] = 0;
+                }
+            }
+        }
+    }
+};
 
 void printgrid() {
     printf("\n");
