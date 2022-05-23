@@ -13,6 +13,7 @@
 #include <time.h>
 #include "twentyfortyeight.h"
 #include <fstream>
+
 using namespace std;
 void printgrid();
 void gameover();
@@ -35,22 +36,45 @@ int main(){
 /*
     while(1){
         if(GetAsyncKeyState(VK_UP)) {
-            printf("gfdgfdbvc\n");
+            up();
             Sleep(2000);
             GetAsyncKeyState(VK_UP);
+            break;
         }
     }*/
 while (1) {
 place();
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n");
     printgrid();
-//left();
-down();
-printgrid();
 
+    while(1){
+        if(GetAsyncKeyState(VK_UP)) {
+            up();
+            Sleep(500);
+            GetAsyncKeyState(VK_UP);
+            break;
+        }
+        if(GetAsyncKeyState(VK_DOWN)) {
+            down();
+            Sleep(500);
+            GetAsyncKeyState(VK_DOWN);
+            break;
+        }
+        if(GetAsyncKeyState(VK_RIGHT)) {
+            right();
+            Sleep(500);
+            GetAsyncKeyState(VK_RIGHT);
+            break;
+        }
+        if(GetAsyncKeyState(VK_LEFT)) {
+            left();
+            Sleep(500);
+            GetAsyncKeyState(VK_LEFT);
+            break;
+        }
+    }
 
-printf("\n%d\n",k);
 k++;
-
  if (k > 1000)
      exit(0);
 }
